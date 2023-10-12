@@ -1,15 +1,45 @@
 import { useEffect, useState } from "react";
-import { BsSearch } from "react-icons/bs";
 import Card from "./Components/Card";
-const API_URL = "http://www.omdbapi.com/?apikey=95010356&";
+import SearchIcon from "@mui/icons-material/Search";
+import Grid from "@mui/material/Grid";
+import { Box } from "@mui/material";
+import "./App.css";
+
+const API_URL = process.env.REACT_APP_APILINK;
 
 function App() {
+  const alltimefavourites = [
+    "Harry Potter and the Goblet of Fire",
+    "peabody",
+    "star",
+    "avengers",
+    "heist",
+    "big",
+  ];
   const [moviename, setmoviename] = useState("");
   const [movielist, setmovielist] = useState([]);
   const [error, seterror] = useState("");
+
+  useEffect(() => {
+    const recommendedMoviesData = [];
+    const loadinitialposters = async () => {
+      for (const title of alltimefavourites) {
+        const response = await fetch(`${API_URL}&s=${title}`);
+        const data = await response.json();
+        if (data.Response === "True") {
+          const temp = data.Search[0];
+          recommendedMoviesData.push(temp);
+        } else {
+          seterror(data.Error);
+        }
+      }
+      setmovielist(recommendedMoviesData);
+    };
+    loadinitialposters();
+  }, []);
+
   const searchmovies = async (title) => {
     const response = await fetch(`${API_URL}&s=${title}`);
-
     const data = await response.json();
     if (data.Response === "False") {
       seterror(data.Error);
@@ -18,6 +48,7 @@ function App() {
       seterror("");
       setmovielist(data.Search);
     }
+    setmoviename("");
   };
   function searchthemovie(event) {
     setmoviename(event.target.value);
@@ -27,22 +58,31 @@ function App() {
   }
 
   return (
-    <div>
-      <h1>Movieworld</h1>
-      <div>
+    <div className="full-page">
+      <Box>
+        <h1 className="web-title">Movieworld</h1>
+      </Box>
+
+      <div className="searchbar">
         <input
-          placeholder="Search movies"
+          label="Search Movie"
+          placeholder="Search Movie"
           value={moviename}
           onChange={searchthemovie}
         />
-        <BsSearch onClick={makerequest} />
+
+        <SearchIcon
+          onClick={makerequest}
+          fontSize="large"
+          style={{ margin: "10px", color: "white" }}
+        />
       </div>
-      {error && <p>{`Sorry! ${error}`}</p>}
-      <div>
+      {error && <p className="errorpara">{`Sorry! ${error}`}</p>}
+      <Grid container className="Gridcontainer">
         {movielist.map((m1, index) => (
-          <Card key={index} movie={m1} />
+          <Card key={index} movie={m1} style={{ padding: "2%" }} />
         ))}
-      </div>
+      </Grid>
     </div>
   );
 }

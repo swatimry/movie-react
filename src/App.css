@@ -1,0 +1,140 @@
+@import url("https://fonts.googleapis.com/css2?family=Autour+One&family=Roboto+Slab&family=Source+Sans+3:wght@400;600;700&display=swap");
+body {
+  background-color: rgb(6, 5, 5);
+}
+.errorpara {
+  color: #a89ec9;
+
+  text-align: center;
+}
+.full-page {
+  margin: 40px 30px 40px 30px;
+}
+.web-title {
+  font-family: "Autour One", cursive;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #a89ec9;
+  font-weight: 500;
+  font-size: 800;
+}
+.title {
+  font-family: "Autour One", cursive;
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.searchbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 50px;
+}
+.poster {
+  width: 60%;
+
+  padding: 1%;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  height: 70%;
+}
+
+input,
+textarea {
+  border: none;
+  padding: 1%;
+
+  font-size: 0.5em;
+  font-weight: 300;
+  letter-spacing: 1px;
+  border-radius: 25px;
+  box-shadow: inset 0 0 0 3px #fff, 0 0 0 4px #fff, 3px -3px 30px #1beabd,
+    -3px 3px 30px #10abff;
+  outline: none;
+  font-size: larger;
+}
+
+input:focus {
+  outline: none;
+}
+.moviecard {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: 5px 10px 15px 10px;
+  height: 500px;
+  padding: 2%;
+
+  border: 1px solid #ffffff22;
+  background-color: #282c34;
+  background: linear-gradient(
+    0deg,
+    rgba(40, 44, 52, 1) 0%,
+    rgba(17, 0, 32, 0.5) 100%
+  );
+  box-shadow: 0 7px 20px 5px #00000088;
+  border-radius: 0.7rem;
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  overflow: hidden;
+  transition: 0.5s all;
+  ::before {
+    position: fixed;
+    content: "";
+    box-shadow: 0 0 100px 40px #ffffff08;
+    top: -10%;
+    left: -100%;
+    transform: rotate(-45deg);
+    height: 60rem;
+    transition: 0.7s all;
+  }
+  &:hover {
+    border: 1px solid #ffffff44;
+    box-shadow: 0 7px 50px 10px #000000aa;
+
+    filter: brightness(1.3);
+    ::before {
+      filter: brightness(0.5);
+      top: -100%;
+      left: 200%;
+    }
+  }
+}
+.Gridcontainer {
+  margin-top: 30px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  color: #a89ec9;
+  font-weight: 500;
+  font-size: medium;
+}
+.year {
+  display: flex;
+  align-items: center;
+  color: #a89ec9;
+  margin-right: 0.2rem;
+}
+.stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 9% 0 9%;
+}
+@media (max-width: 400px) {
+  /* Adjust the max-width as needed */
+  .web-title {
+    font-size: 150;
+    align-items: flex-start;
+    /* Change the font size for small screens */
+  }
+  .searchbar input {
+    font-size: 16px;
+    /* Change the font size for small screens */
+  }
+}
